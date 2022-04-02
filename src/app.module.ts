@@ -28,3 +28,5 @@ import { join } from "path";
   controllers: [AppController],
 })
 export class AppModule {}
+
+// TODO: Make sure, that the validation pipe is working on all user data
