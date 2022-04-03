@@ -13,6 +13,7 @@ export class AuthController {
     return this.authService.generateToken(req.user);
   }
 
+  // TODO: mb use guard, for unauthorized only
   @Post('/signup')
   async registration(@Body() userDto: CreateUserDto) {
     return this.authService.registerUser(userDto);
