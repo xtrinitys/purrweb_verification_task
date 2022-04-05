@@ -4,6 +4,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "../users/entities/user.entity";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import * as bcrypt from "bcrypt";
+import { JwtToken } from "../common/entities/jwt-token.entity";
 
 @Injectable()
 export class AuthService {
@@ -40,9 +41,11 @@ export class AuthService {
   }
 
   async generateToken(user: User) {
-    const payload = {email: user.email, sub: user.id}
-    return {
-      access_token: this.jwtService.sign(payload)
-    };
+    const payload = { email: user.email, sub: user.id }
+    // return new JwtToken(this.jwtService.sign(payload), payload.sub);
+    return new JwtToken(payload.sub, this.jwtService.sign(payload));
+    // return {
+    //   access_token: this.jwtService.sign(payload)
+    // };
   }
 }

@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { CreateListDto } from "./dto/create-list.dto";
 import { ListsService } from "./lists.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('lists')
 @Controller('lists')
 export class ListsController {
   constructor(private readonly listsService: ListsService) {}
