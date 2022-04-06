@@ -11,5 +11,5 @@ export class List extends BaseEntity {
 
   @ApiProperty({type: () => User})
   @ManyToOne(() => User, (user) => user.columns)
-  author: User;
+  author: User['id'];
 }

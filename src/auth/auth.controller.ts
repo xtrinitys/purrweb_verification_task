@@ -12,6 +12,7 @@ import {
   ApiUnauthorizedResponse
 } from "@nestjs/swagger";
 import { JwtToken } from "../common/entities/jwt-token.entity";
+import { SkipJwt } from "../common/decorators/skip-jwt.decorator";
 
 @ApiTags('auth')
 @Controller('auth')
@@ -20,6 +21,7 @@ export class AuthController {
 
   @Post('/signin')
   @UseGuards(LocalAuthGuard)
+  @SkipJwt()
   @ApiOperation({summary: 'Sign in user'})
   @ApiBasicAuth('LocalAuthGuard')
   @ApiBody({ type: CreateUserDto })
@@ -33,8 +35,8 @@ export class AuthController {
     return this.authService.generateToken(req.user);
   }
 
-  // TODO: mb use guard, for unauthorized only
-  // TODO: mb add different response messages
+  @Post('/signup')
+  @SkipJwt()
   @ApiOperation({ summary: 'Sign up user' })
   @ApiResponse({
     status: 201,
@@ -42,7 +44,6 @@ export class AuthController {
     description: 'User created'
   })
   @ApiBadRequestResponse({ description: 'User already exists or incorrect user data' })
-  @Post('/signup')
   async registration(@Body() userDto: CreateUserDto) {
     return this.authService.registerUser(userDto);
   }

@@ -1,5 +1,4 @@
-import { User } from "../../users/entities/user.entity";
-import { IsInstance, IsString, MaxLength, MinLength } from "class-validator";
+import { IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateListDto {
   @MinLength(5, {
@@ -10,7 +9,7 @@ export class CreateListDto {
   })
   @IsString()
   name: string;
-
-  @IsInstance(User)
-  author: User;
+  //
+  // @IsUUID()
+  // author: User['id'];
 }

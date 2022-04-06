@@ -10,8 +10,6 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  //TODO: Exception handling
-
   async createUser(userDto: CreateUserDto): Promise<User> {
     return await this.userRepository.save(userDto);
   }
