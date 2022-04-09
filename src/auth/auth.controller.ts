@@ -31,6 +31,7 @@ export class AuthController {
     description: 'User signed in'
   })
   @ApiUnauthorizedResponse({ description: "Incorrect email or password" })
+  // TODO: Get user decorator
   async login(@Request() req) {
     return this.authService.generateToken(req.user);
   }

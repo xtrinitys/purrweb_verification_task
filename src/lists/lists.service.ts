@@ -4,7 +4,6 @@ import { List } from "./entities/list.entity";
 import { Repository } from "typeorm";
 import { CreateListDto } from "./dto/create-list.dto";
 import { UpdateListDto } from "./dto/update-list.dto";
-import { Card } from "../cards/entities/card.entity";
 import { IBaseService } from "../common/interfaces/base.service";
 
 @Injectable()
@@ -14,7 +13,10 @@ export class ListsService implements IBaseService<List, CreateListDto, UpdateLis
   ) {}
 
   async createOne(entityDto: CreateListDto, authorId: string): Promise<List> {
-    return await this.listsRepository.save({...entityDto, authorId: authorId});
+    return await this.listsRepository.save({
+      ...entityDto,
+      author: authorId
+    });
   }
 
   async deleteOne(id: string) {
@@ -30,10 +32,5 @@ export class ListsService implements IBaseService<List, CreateListDto, UpdateLis
       id: id,
       ...entityDto
     });
-  }
-
-  getCards(id: string): Card[] {
-    //TODO: cards
-    return [new Card()]
   }
 }

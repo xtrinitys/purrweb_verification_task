@@ -1,7 +1,7 @@
 import { IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateListDto {
-  @MinLength(5, {
+  @MinLength(2, {
     message: 'Name of the list is too short'
   })
   @MaxLength(50, {
@@ -9,7 +9,4 @@ export class CreateListDto {
   })
   @IsString()
   name: string;
-  //
-  // @IsUUID()
-  // author: User['id'];
 }
