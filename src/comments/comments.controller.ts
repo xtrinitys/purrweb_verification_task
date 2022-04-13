@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGuards } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
 import { CreateCommentDto } from "./dto/create-comment.dto";
 import { GetUser } from "../common/decorators/get-user.decorator";
 import { User } from "../users/entities/user.entity";
 import { UpdateCommentDto } from "./dto/update-comment.dto";
+import { CommentsGuard } from "./comments.guard";
 
 @Controller('/cards/:cardId/comments')
 export class CommentsController {
@@ -28,11 +29,13 @@ export class CommentsController {
     return this.commentsService.getOne(id);
   }
 
+  @UseGuards(CommentsGuard)
   @Patch('/:id')
   updateComment(@Body() commentDto: UpdateCommentDto, @Param('id', ParseUUIDPipe) id: string) {
     return this.commentsService.updateOne(commentDto, id);
   }
 
+  @UseGuards(CommentsGuard)
   @Delete('/:id')
   deleteComment(@Param('id', ParseUUIDPipe) id: string) {
     return this.commentsService.delete(id);

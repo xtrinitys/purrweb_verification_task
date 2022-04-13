@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
 import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -9,7 +8,7 @@ import { ListsModule } from "./lists/lists.module";
 import { CardsModule } from "./cards/cards.module";
 import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
-import { CommentsModule } from './comments/comments.module';
+import { CommentsModule } from "./comments/comments.module";
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { CommentsModule } from './comments/comments.module';
     CardsModule,
     CommentsModule,
   ],
-  controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
@@ -44,3 +42,4 @@ import { CommentsModule } from './comments/comments.module';
 export class AppModule {}
 
 // TODO: Make sure, that the validation pipe is working on all user data
+// TODO: Mb make common function for validating UUID from request
