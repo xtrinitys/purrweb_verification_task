@@ -9,6 +9,7 @@ import { ListsModule } from "./lists/lists.module";
 import { CardsModule } from "./cards/cards.module";
 import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard";
     AuthModule,
     ListsModule,
     CardsModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [
