@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, NotFoundException } from "@nestjs/common";
+import { CanActivate, ExecutionContext } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { List } from "./entities/list.entity";
 import { Repository } from "typeorm";
@@ -11,7 +11,7 @@ export class ListsGuard implements CanActivate {
 
     const urlUserId = req.params.userId;
     const guardUserId = req.user.id;
-    const userEquals = urlUserId === guardUserId
+    const userEquals = urlUserId === guardUserId;
 
     const listId = req.params.id;
 
@@ -20,16 +20,12 @@ export class ListsGuard implements CanActivate {
     }
 
     if (listId) {
-      const listExists: number = await this.listRepository.count({
+      await this.listRepository.findOneOrFail({
         where: {
           id: listId,
           author: guardUserId
         }
       });
-
-      if (listExists < 1) {
-        throw new NotFoundException('List not found');
-      }
     }
 
     return true;

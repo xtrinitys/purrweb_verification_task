@@ -11,6 +11,11 @@ import { ListsGuard } from "./lists.guard";
 export class ListsController {
   constructor(private readonly listsService: ListsService) {}
 
+  @Get()
+  getUserLists(@Param('userId', ParseUUIDPipe) authorId: string) {
+    return this.listsService.getUserLists(authorId);
+  }
+
   // @ApiBearerAuth()
   @Post()
   createOne(@Param('userId', ParseUUIDPipe) authorId: string, @Body() listDto: CreateListDto) {

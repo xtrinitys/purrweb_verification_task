@@ -12,6 +12,10 @@ export class ListsService implements IBaseService<List, CreateListDto, UpdateLis
     @InjectRepository(List) private readonly listsRepository: Repository<List>
   ) {}
 
+  async getUserLists(authorId: string): Promise<List[]> {
+    return await this.listsRepository.find({ where: { author: authorId } });
+  }
+
   async createOne(entityDto: CreateListDto, authorId: string): Promise<List> {
     return await this.listsRepository.save({
       ...entityDto,
