@@ -14,6 +14,6 @@ export class Card extends BaseEntity {
   content: string;
 
   @ManyToOne(() => List, (list) => list.cards)
-  @ApiProperty({ type: type => List })
+  @ApiProperty({ example: '8082176c-e5ff-49a5-8ffa-e8b4c0e5db78' })
   list: List['id'];
 }
