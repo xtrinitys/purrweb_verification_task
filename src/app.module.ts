@@ -40,3 +40,9 @@ import { CommentsModule } from "./comments/comments.module";
   ]
 })
 export class AppModule {}
+// TODO: BEFORE DEPLOY TASKS:
+//  - Full swagger integration
+//  - Make diagram at dbdiagram.io
+//  - Test all endpoints with broken data
+//  - Deal with passport etc
+//  - Mb add full CRUD for user

@@ -3,13 +3,27 @@ import { CardsService } from "./cards.service";
 import { CreateCardDto } from "./dto/create-card.dto";
 import { UpdateCardDto } from "./dto/update-card.dto";
 import { CardsGuard } from "./cards.guard";
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+  ApiUnauthorizedResponse
+} from "@nestjs/swagger";
 
 @UseGuards(CardsGuard)
+@ApiTags('cards')
+@ApiBearerAuth()
 @Controller('lists/:listId/cards')
 export class CardsController {
   constructor(private readonly cardsService: CardsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create card' })
+  @ApiCreatedResponse({ description: 'Card created', schema: { $ref: 'Card' } })
+  @ApiUnauthorizedResponse()
+  @ApiBadRequestResponse()
   createCard(@Body() cardDto: CreateCardDto, @Param('listId', ParseUUIDPipe) listId: string) {
     return this.cardsService.createOne(cardDto, listId);
   }
