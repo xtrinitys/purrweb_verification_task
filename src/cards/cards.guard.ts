@@ -10,7 +10,6 @@ export class CardsGuard implements CanActivate {
     @InjectRepository(List) private readonly listsRepository: Repository<List>
   ) {}
 
-  // FIXME: add validation to guards
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest();
     const userId = req.user.id;
@@ -28,6 +27,7 @@ export class CardsGuard implements CanActivate {
         list: listId
       });
     }
+
 
     return true;
   }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Request, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
 import { CreateUserDto } from "../users/dto/create-user.dto";
@@ -13,6 +13,8 @@ import {
 } from "@nestjs/swagger";
 import { JwtToken } from "../common/entities/jwt-token.entity";
 import { SkipJwt } from "../common/decorators/skip-jwt.decorator";
+import { User } from "../users/entities/user.entity";
+import { GetUser } from "../common/decorators/get-user.decorator";
 
 @ApiTags('auth')
 @Controller('auth')
@@ -31,9 +33,8 @@ export class AuthController {
     description: 'User signed in'
   })
   @ApiUnauthorizedResponse({ description: "Incorrect email or password" })
-  // TODO: Get user decorator
-  async login(@Request() req) {
-    return this.authService.generateToken(req.user);
+  async login(@GetUser() user: User) {
+    return this.authService.generateToken(user);
   }
 
   @Post('/signup')
