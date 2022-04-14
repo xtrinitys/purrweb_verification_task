@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany } from "typeorm";
 import { BaseEntity } from "../../common/entities/base.entity";
 import { List } from "../../lists/entities/list.entity";
 import { ApiProperty } from "@nestjs/swagger";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -15,5 +16,8 @@ export class User extends BaseEntity {
 
   @ApiProperty({type: () => [List]})
   @OneToMany(() => List, (list) => list.author)
-  columns: List[]
+  columns: List[];
+
+  @OneToMany(() => Comment, (comment) => comment.author)
+  comments: Comment[];
 }
