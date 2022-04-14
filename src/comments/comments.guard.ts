@@ -1,9 +1,9 @@
-// TODO: mb make all guards @Injectable
-import { CanActivate, ExecutionContext, UnauthorizedException } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Comment } from "./entities/comment.entity";
 import { Repository } from "typeorm";
 
+@Injectable()
 export class CommentsGuard implements CanActivate {
   constructor(
     @InjectRepository(Comment) private readonly commentsRepository: Repository<Comment>

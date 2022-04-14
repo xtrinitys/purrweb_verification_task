@@ -4,10 +4,9 @@ import { List } from "./entities/list.entity";
 import { Repository } from "typeorm";
 import { CreateListDto } from "./dto/create-list.dto";
 import { UpdateListDto } from "./dto/update-list.dto";
-import { IBaseService } from "../common/interfaces/base.service";
 
 @Injectable()
-export class ListsService implements IBaseService<List, CreateListDto, UpdateListDto> {
+export class ListsService {
   constructor(
     @InjectRepository(List) private readonly listsRepository: Repository<List>
   ) {}

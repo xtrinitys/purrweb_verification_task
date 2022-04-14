@@ -40,6 +40,3 @@ import { CommentsModule } from "./comments/comments.module";
   ]
 })
 export class AppModule {}
-
-// TODO: Make sure, that the validation pipe is working on all user data
-// TODO: Mb make common function for validating UUID from request

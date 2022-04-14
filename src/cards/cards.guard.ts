@@ -1,9 +1,10 @@
-import { CanActivate, ExecutionContext } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Card } from "./entities/card.entity";
 import { Repository } from "typeorm";
 import { List } from "../lists/entities/list.entity";
 
+@Injectable()
 export class CardsGuard implements CanActivate {
   constructor(
     @InjectRepository(Card) private readonly cardsRepository: Repository<Card>,
@@ -27,7 +28,6 @@ export class CardsGuard implements CanActivate {
         list: listId
       });
     }
-
 
     return true;
   }
