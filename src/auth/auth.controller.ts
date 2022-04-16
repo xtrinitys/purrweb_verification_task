@@ -6,8 +6,9 @@ import {
   ApiBadRequestResponse,
   ApiBasicAuth,
   ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
-  ApiResponse,
   ApiTags,
   ApiUnauthorizedResponse
 } from "@nestjs/swagger";
@@ -27,11 +28,7 @@ export class AuthController {
   @ApiOperation({summary: 'Sign in user'})
   @ApiBasicAuth('LocalAuthGuard')
   @ApiBody({ type: CreateUserDto })
-  @ApiResponse({
-    status: 201,
-    type: JwtToken,
-    description: 'User signed in'
-  })
+  @ApiOkResponse({ type: JwtToken, description: 'User signed in' })
   @ApiUnauthorizedResponse({ description: "Incorrect email or password" })
   async login(@GetUser() user: User) {
     return this.authService.generateToken(user);
@@ -40,11 +37,7 @@ export class AuthController {
   @Post('/signup')
   @SkipJwt()
   @ApiOperation({ summary: 'Sign up user' })
-  @ApiResponse({
-    status: 201,
-    type: JwtToken,
-    description: 'User created'
-  })
+  @ApiCreatedResponse({type: JwtToken, description: 'User created'})
   @ApiBadRequestResponse({ description: 'User already exists or incorrect user data' })
   async registration(@Body() userDto: CreateUserDto) {
     return this.authService.registerUser(userDto);

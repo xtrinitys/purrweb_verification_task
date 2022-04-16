@@ -8,6 +8,7 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiForbiddenResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -35,6 +36,7 @@ export class CardsController {
   @Get()
   @ApiOperation({ summary: 'Get all cards from the list' })
   @ApiOkResponse({ type: Card, isArray: true })
+  @ApiNotFoundResponse({ description: 'Not found' })
   getAllListCards(@Param('listId', ParseUUIDPipe) listId: string) {
    return this.cardsService.getAllFromList(listId);
   }
@@ -42,6 +44,7 @@ export class CardsController {
   @Get('/:id')
   @ApiOperation({ summary: 'Get card' })
   @ApiOkResponse({ type: Card })
+  @ApiNotFoundResponse({ description: 'Not found' })
   getCard(@Param('id', ParseUUIDPipe) id: string) {
     return this.cardsService.getOne(id);
   }
@@ -49,6 +52,7 @@ export class CardsController {
   @Patch('/:id')
   @ApiOperation({ summary: 'Update card' })
   @ApiOkResponse({ type: Card })
+  @ApiNotFoundResponse({ description: 'Not found' })
   updateCard(@Param('id', ParseUUIDPipe) id: string, @Body() cardDto: UpdateCardDto) {
     return this.cardsService.updateOne(id, cardDto);
   }
@@ -56,6 +60,7 @@ export class CardsController {
   @Delete('/:id')
   @ApiOperation({ summary: 'Delete card' })
   @ApiOkResponse({description: 'Deleted'})
+  @ApiNotFoundResponse({ description: 'Not found' })
   deleteCard(@Param('id', ParseUUIDPipe) id: string) {
     return this.cardsService.deleteOne(id);
   }
