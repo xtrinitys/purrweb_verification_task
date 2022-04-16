@@ -1,16 +1,4 @@
-// import { IsString, MaxLength, MinLength } from "class-validator";
-//
-// export class UpdateListDto {
-//   @MinLength(2, {
-//     message: 'Name of the list is too short'
-//   })
-//   @MaxLength(50, {
-//     message: 'Name of the list is too long'
-//   })
-//   @IsString()
-//   name: string;
-// }
-
 import { CreateListDto } from "./create-list.dto";
+import { PartialType } from "@nestjs/swagger";
 
-export type UpdateListDto = Partial<CreateListDto>;
+export class UpdateListDto extends PartialType(CreateListDto) {}

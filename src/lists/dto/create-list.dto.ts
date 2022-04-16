@@ -1,4 +1,5 @@
 import { IsString, MaxLength, MinLength } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateListDto {
   @MinLength(2, {
@@ -8,5 +9,6 @@ export class CreateListDto {
     message: 'Name of the list is too long'
   })
   @IsString()
+  @ApiProperty({ example: 'Todo list' })
   name: string;
 }

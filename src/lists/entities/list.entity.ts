@@ -10,7 +10,7 @@ export class List extends BaseEntity {
   @Column({type: 'varchar', length: 50})
   name: string;
 
-  @ApiProperty({type: () => User})
+  @ApiProperty({example: '1f943f0f-b15d-4c36-9aaf-02456f3251d6'})
   @ManyToOne(() => User, (user) => user.columns)
   author: User['id'];
 
